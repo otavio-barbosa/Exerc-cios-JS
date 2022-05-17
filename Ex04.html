@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Logica de Programação Javascript</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>Lógica de programação com Javascript</h1>
+        
+        <script>
+            var numT = parseInt(prompt("Digite um num pra tabuada:"))
+
+/**
+           for (var i = 1; i < 5; i++) {
+               alert(numT + " X " + i + " = " + (numT * i))
+           }
+**/
+
+/**
+           var n = 1;
+           while (n <= 10) {
+             alert(numT + " X " + n + " = " + (numT * n))
+             n++
+           }
+**/
+
+            for (var i = 0; i < 31; i++) {
+               document.write(numT + " X " + i + " = " + (numT * i) + "<br>")
+               if (i % 10 === 0 && i > 0) {
+                 document.write("<hr>")
+               }
+           }
+
+        </script>
+        </body>
+    </html>
+                
+                
+
+                
+          

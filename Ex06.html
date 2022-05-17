@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Logica de Programação Javascript</title>
+        <meta charset="utf-8">
+
+        <style>
+            button {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Lógica de programação com Javascript</h1>
+
+        <button onclick ="btnSoma()">+</button> 
+        <button onclick="btnSub()">-</button>
+        <button onclick="btnMulti()">*</button> 
+        <button onclick="btnDiv()">/</button>
+
+        <div id="entNum"></div>
+        
+        <script>
+            var entNum = parseInt(prompt("Digite um número:")) 
+
+            var selecao = document.querySelector("#entNum")
+
+            selecao.innerHTML = entNum
+
+            //FUNÇÕES
+
+            function btnSoma() {
+                var nSoma = parseInt(prompt("Digite um número para somar com " + entNum))
+
+                selecao.innerHTML = ("Resultado da soma: " + (entNum += nSoma)) //entNum = entNum + nSoma
+            }
+
+            function btnSub() {
+                var nsub = parseInt(prompt("Digite um número para subtrair com " + entNum))
+                selecao.innerHTML = ("O resultado da subtração é: " + (entNum -= nsub)) //entNum = entNum - nsub
+            }
+
+            function btnMulti() {
+                var nMulti = parseInt(prompt("Digite um número para multiplicar com " + entNum))
+                selecao.innerHTML = ("O resultado da multiplicacao é: " + (entNum *= nMulti)) //entNum = entNum * nMulti
+            }
+            
+            function btnDiv() {
+                var nDiv = parseInt(prompt("Digite o número para dividir com: " + entNum))
+                selecao.innerHTML = ("O resultado da divisão é: " + (entNum /= nDiv)) //entNum = entNum / nDiv
+            }
+   
+            
+        </script>
+    </body>
+</html>

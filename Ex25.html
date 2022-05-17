@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Logica de Programação Javascript</title>
+        <meta charset="utf-8">
+
+        <style>
+            button, input {
+                width: 100px;
+                height: 100px;
+                background-color: brown;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Desafio Relógio</h1>
+
+        <div>
+            <h2>Cronômetro</h2>
+
+            <input type="text" id="cronometro">
+            <button id="iniciar">Iniciar</button>
+            <button id="pausar">Pausar</button>
+            <button id="parar">Parar</button>
+
+        </div>
+        
+        <script>
+           (function(){
+                var $cronometro = document.querySelector("#cronometro")
+                var $iniciar = document.querySelector("#iniciar")
+                var $pausar = document.querySelector("#pausar")
+                var $parar = document.querySelector("#parar")
+
+                $iniciar.addEventListener("click", init)
+                $pausar.addEventListener("click", pause)
+                $parar.addEventListener("click", stop)
+                
+                var intervalo = null;
+                var rodando = false;
+                var timeStampingClickInit = 0;
+                var timeStampingClickPause = 0;
+                var timeStampingTempoDecorrido = 0;
+
+                function init() {
+                    if (rodando) return;                //Se estiver rodando, não acontece nada apenas retornas
+                    stop();                             
+                    timeStampingClickInit = Date.now() //date now também mostra o Timing Stamping, igual a new Date().getTime()
+                    iniciarCronometro()
+                    rodando = true
+                }   
+
+                function pause() {
+                    if (!$cronometro.value) return;    //Se não ter valor no input, apenas retorna e não acontece nada
+                    if (rodando) {
+                        clearInterval(intervalo)
+                        timeStampingClickPause = Date.now()
+                        timeStampingTempoDecorrido += (timeStampingClickPause - timeStampingClickInit)  //timeStampingTempoDecorrido = timeStampingTempoDecorrido + (timeStampingClickPause - timeStampingClickInit)
+                    } else {
+                        timeStampingClickInit = Date.now()
+                        iniciarCronometro(timeStampingTempoDecorrido)
+                    }
+                    rodando = !rodando; //Se rodando for true, dps q executar o 1 if vai passar a ser falso
+                                        //Se rodando for false, dps q executar o else vai passar a ser true
+                                        //if .. rodando = false
+                                        //else .. rodando = true
+                }
+
+                function stop() {
+                    rodando = false;
+                    timeStampingClickInit = 0;
+                    timeStampingClickPause = 0;
+                    timeStampingTempoDecorrido = 0;
+                    clearInterval(intervalo);
+                    $cronometro.value = '';
+                }   
+                
+                function iniciarCronometro(tempoDecorrido) {
+                    var _ms = timeStampingTempoDecorrido || 0;
+                    intervalo = setInterval(function(){
+                        var timeStAgora = Date.now()
+                        var diferenca = timeStAgora - timeStampingClickInit
+                        $cronometro.value = formataMs(diferenca + _ms)
+                    }, 100)
+                }
+
+                function formataMs(ms) {
+
+                    const MINUTO = 60 * 1000    //Const precisa deixar em maiúsculo. N pega em todos nave.
+                    
+                    if (ms < 1000) {
+                        return ms;                  //caso seja quebrado:
+                    } else if (ms < MINUTO) {       //ms = 30500
+                        var s = (ms / 1000)       
+                        s = parseInt(s)            //30
+
+                        var c = ms - (s * 1000)    //30500 - (30 * 1000) = 30500 - 30000 = 500
+                        return s + ':' + c; 
+                    } else {
+                        var m = ms / MINUTO
+                        m = parseInt(m)
+
+                        return m + ':' + formataMs( ms - m * MINUTO );  //o que a func formataMs retornar :
+                                                                        //s + ':' + c
+
+                                                                        //func recursiva: quando chama a func
+                                                                        //na propria func
+                        //
+                    /*  
+                        var s = ms / 1000 - (m * 60)
+                        s = parseInt(s)
+                        var c = ms - (s * 1000) - (m * MINUTO)
+                        return m + ':' + s + ':' + c;
+                    */
+                    }
+                }
+           })()
+    
+        </script>
+    </body>
+</html>

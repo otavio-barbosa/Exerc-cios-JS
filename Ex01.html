@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Ex01</title>
+    </head>
+
+    <body>
+        <h1>Ex01</h1>
+
+        <script>
+            var num1 = prompt("Digite um número: ");
+            num1 = parseInt(num1);                       //A soma só funciona colocando a var na frete
+                                                        //num1 = ... n só parseInt
+            var num2 = prompt("Digite outro número: ");
+            num2 = parseInt(num2); 
+
+            alert("A divisao é: " + (num1 / num2));
+            alert("A multiplicação é: " + (num1 * num2));   //Entre parenteses para que o JS não leia tudo como
+            alert("A subtração é: " + (num1 - num2));    //uma string concatenada com um numeros
+            alert("A soma é: " + (num1+num2)) ;           
+        </script>
+    </body>
+</html>
